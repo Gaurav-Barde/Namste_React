@@ -1,0 +1,38 @@
+body {
+  font-family: sans-serif;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-items>ul {
+  display: flex;
+  list-style-type: none;
+}
+
+.nav-items>ul>li {
+  padding: 8;
+}
+
+.logo {
+  width: 80px;
+}
+
+.restaurant-list {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.restaurant-list>.restaurant-card {
+  margin: 15px;
+}
+
+.restaurant-card-image {
+  width: 200px;
+  height: 150px;
+}
+.cuisines {
+  max-width: 180px;
+}
