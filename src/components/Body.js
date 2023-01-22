@@ -14,6 +14,8 @@ const Body = () => {
   const [restaurants, setRestaurants] = useState(restaurantList);
   let [searchText, setSearchText] = useState("");
 
+  console.log(restaurants);
+
   return (
     <>
       <div className="search-container">

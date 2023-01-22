@@ -1,6 +1,6 @@
-const RestaurantCard = ({ image, name, cuisine, rating, resId }) => {
+const RestaurantCard = ({ image, name, cuisine, rating }) => {
   return (
-    <div className="restaurant-card" key={resId}>
+    <div className="restaurant-card">
       <img className="restaurant-card-image" src={image.url} />
       <h4>{name}</h4>
       <h4 className="cuisines">
