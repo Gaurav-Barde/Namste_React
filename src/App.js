@@ -8,8 +8,8 @@ import Contact from "./components/Contact";
 import Profile from "./components/Profile";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Shimmer from "./components/Shimmer";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 
 const Instamart = lazy(() => import("./components/Instamart"));
 

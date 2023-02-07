@@ -20,8 +20,8 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=15.875628420654445&lng=74.46725349671841&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
-    setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
-    setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+    setAllRestaurants(json?.data?.cards[0]?.data?.data?.cards);
+    setFilteredRestaurants(json?.data?.cards[0]?.data?.data?.cards);
   }
   const isOnline = useIsOnline();
 
@@ -34,7 +34,7 @@ const Body = () => {
     <Shimmer />
   ) : (
     <>
-      <div className="search-container">
+      <div className="bg-pink-50 my-3 p-3">
         <input
           type="text"
           value={searchText}
@@ -42,10 +42,10 @@ const Body = () => {
             setSearchText(e.target.value);
             // setRestaurants(restaurantList);
           }}
-          className="search-bar"
+          className="p-1"
         />
         <button
-          className="search-btn"
+          className="mx-3 bg-purple-200 hover:bg-purple-300 transition-all p-1 px-4 rounded-sm"
           onClick={() => {
             const data = filterData(searchText, allRestaurants);
             setFilteredRestaurants(data);
@@ -54,7 +54,7 @@ const Body = () => {
           Search
         </button>
       </div>
-      <div className="restaurant-list">
+      <div className="flex flex-wrap">
         {!filteredRestaurants.length ? (
           <h1>No restaurant matches your search</h1>
         ) : (
