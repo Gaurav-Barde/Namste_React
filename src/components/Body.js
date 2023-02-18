@@ -1,15 +1,18 @@
 import RestaurantCard from "./RestaurantCard";
 import { restaurantList } from "../constants";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { filterData } from "../utils/helper";
 import useIsOnline from "../utils/useIsOnline";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-  let [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState("");
+
+  const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
     getRestaurants();
@@ -20,8 +23,8 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=15.875628420654445&lng=74.46725349671841&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
-    setAllRestaurants(json?.data?.cards[0]?.data?.data?.cards);
-    setFilteredRestaurants(json?.data?.cards[0]?.data?.data?.cards);
+    setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+    setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
   }
   const isOnline = useIsOnline();
 
@@ -33,8 +36,8 @@ const Body = () => {
   return !allRestaurants.length ? (
     <Shimmer />
   ) : (
-    <>
-      <div className="bg-pink-50 my-3 p-3">
+    <div className="bg-pink-50 my-3 p-3">
+      <div className="py-10 px-6">
         <input
           type="text"
           value={searchText}
@@ -53,6 +56,20 @@ const Body = () => {
         >
           Search
         </button>
+
+        {/* context changer input */}
+        <input
+          type="text"
+          value={user.name}
+          onChange={(e) => {
+            setUser({
+              ...user,
+              name: e.target.value,
+            });
+            // setRestaurants(restaurantList);
+          }}
+          className="p-1"
+        />
       </div>
       <div className="flex flex-wrap">
         {!filteredRestaurants.length ? (
@@ -70,7 +87,7 @@ const Body = () => {
           })
         )}
       </div>
-    </>
+    </div>
   );
 };
 

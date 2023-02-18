@@ -2,6 +2,7 @@ import { Component } from "react";
 import { Outlet } from "react-router-dom";
 import ProfileFunctionalComponent from "./Profile";
 import ProfileClassComponent from "./ProfileClass";
+import UserContext from "../utils/UserContext";
 
 // const About = () => {
 //   constructor(props) {
@@ -49,6 +50,13 @@ class About extends Component {
         <p>
           This is Namate React Live Course Chapter 07 - Finding the path 🚀{" "}
         </p>
+        <UserContext.Consumer>
+          {({ user }) => (
+            <h1 className="font-semibold text-xl text-green-700">
+              {user.email}
+            </h1>
+          )}
+        </UserContext.Consumer>
         {/* <ProfileFunctionalComponent name="GauravFunction" /> */}
         <ProfileClassComponent name="Child1" />
       </div>
