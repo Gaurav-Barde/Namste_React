@@ -1,21 +1,27 @@
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { IMG_CDN_URL } from "../constants";
+import { addItem } from "../utils/cartSlice";
 import useRestaurant from "../utils/useRestaurant";
 import Shimmer from "./Shimmer";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
-
   const restaurant = useRestaurant(resId);
+
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (item) => {
+    dispatch(addItem(item));
+  };
 
   return !restaurant ? (
     <Shimmer />
   ) : (
-    <div className="menu">
-      <div>
-        <h1>{restaurant.id}</h1>
-        <h2>{restaurant.name}</h2>
+    <div className="p-4 flex">
+      <div className="mr-2">
+        <h1 className="text-2xl">{restaurant.name}</h1>
         <img
           src={IMG_CDN_URL + restaurant.cloudinaryImageId}
           className="restaurant-card-image"
@@ -30,7 +36,15 @@ const RestaurantMenu = () => {
         <h1>Menu</h1>
         <ul>
           {Object.values(restaurant?.menu?.items).map((item, index) => (
-            <li key={item.id}>{item.name}</li>
+            <li key={item.id} className="my-4">
+              <span className="mr-1">{item.name}</span>
+              <button
+                className="bg-green-300 p-1 px-2 rounded-md"
+                onClick={() => handleAddToCart(item)}
+              >
+                Add
+              </button>
+            </li>
           ))}
         </ul>
       </div>

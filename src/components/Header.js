@@ -1,4 +1,5 @@
 import { useState, useContext } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import useIsOnline from "../utils/useIsOnline";
 import userContext from "../utils/UserContext";
@@ -19,6 +20,8 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const isOnline = useIsOnline();
   const { user } = useContext(userContext);
+
+  const items = useSelector((state) => state.cart.items);
 
   const handleIsLoggedIn = (boolean) => {
     setIsLoggedIn(boolean);
@@ -41,7 +44,7 @@ const Header = () => {
             <Link to="/contact">Contact</Link>
           </li>
           <li key={4} className="px-4">
-            Cart
+            <Link to="/cart">Cart - {items.length} items</Link>
           </li>
           <li key={5} className="px-4">
             <Link to="/instamart">Instamart</Link>
@@ -49,9 +52,6 @@ const Header = () => {
         </ul>
       </div>
       <h1>{isOnline ? "✅" : "🔴"}</h1>
-      <h4>
-        {user.name} <br /> {user.email}
-      </h4>
       {isLoggedIn ? (
         <button onClick={() => handleIsLoggedIn(false)}>Log Out</button>
       ) : (
