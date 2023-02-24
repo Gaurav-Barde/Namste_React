@@ -1,17 +1,14 @@
 import { useState, useContext } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Logo from "../assets/img/logo.png";
 import useIsOnline from "../utils/useIsOnline";
 import userContext from "../utils/UserContext";
 
 const Title = () => {
   return (
     <a href="/">
-      <img
-        className="h-16"
-        alt="logo"
-        src="https://seeklogo.com/images/S/swiggy-logo-8EF8260FA4-seeklogo.com.png"
-      />
+      <img data-testid="logo" className="h-16" alt="logo" src={Logo} />
     </a>
   );
 };
@@ -44,14 +41,16 @@ const Header = () => {
             <Link to="/contact">Contact</Link>
           </li>
           <li key={4} className="px-4">
-            <Link to="/cart">Cart - {items.length} items</Link>
+            <Link data-testid="cart-items" to="/cart">
+              Cart - {items.length} items
+            </Link>
           </li>
           <li key={5} className="px-4">
             <Link to="/instamart">Instamart</Link>
           </li>
         </ul>
       </div>
-      <h1>{isOnline ? "✅" : "🔴"}</h1>
+      <h1 data-testid="online-status">{isOnline ? "✅" : "🔴"}</h1>
       {isLoggedIn ? (
         <button onClick={() => handleIsLoggedIn(false)}>Log Out</button>
       ) : (

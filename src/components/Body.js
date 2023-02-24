@@ -46,6 +46,7 @@ const Body = () => {
             // setRestaurants(restaurantList);
           }}
           className="p-1"
+          data-testid="search-input"
         />
         <button
           className="mx-3 bg-purple-200 hover:bg-purple-300 transition-all p-1 px-4 rounded-sm"
@@ -53,25 +54,12 @@ const Body = () => {
             const data = filterData(searchText, allRestaurants);
             setFilteredRestaurants(data);
           }}
+          data-testid="search-btn"
         >
           Search
         </button>
-
-        {/* context changer input */}
-        <input
-          type="text"
-          value={user.name}
-          onChange={(e) => {
-            setUser({
-              ...user,
-              name: e.target.value,
-            });
-            // setRestaurants(restaurantList);
-          }}
-          className="p-1"
-        />
       </div>
-      <div className="flex flex-wrap">
+      <div data-testid="restaurants" className="flex flex-wrap">
         {!filteredRestaurants.length ? (
           <h1>No restaurant matches your search</h1>
         ) : (
